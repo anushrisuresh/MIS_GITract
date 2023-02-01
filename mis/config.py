@@ -39,4 +39,4 @@ base_output = "output"
 # plot, and testing image paths
 model_path = os.path.join(base_output, "unet_tgs_salt.pth")
 plot_path = os.path.sep.join([base_output, "plot.png"])
-test_pathS = os.path.sep.join([base_output, "test_paths.txt"])
+test_paths = os.path.sep.join([base_output, "test_paths.txt"])
