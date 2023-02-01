@@ -80,7 +80,7 @@ class UNet(Module):
 	def __init__(self, enc_channels=(3, 16, 32, 64),
 		 dec_channels=(64, 32, 16),
 		 nb_classes=1, retain_dim=True,
-		 out_size=(config.INPUT_IMAGE_HEIGHT,  config.INPUT_IMAGE_WIDTH)):
+		 out_size=(config.input_image_height,  config.input_image_width)):
 		super().__init__()
 		# initialize the encoder and decoder
 		self.encoder = Encoder(enc_channels)
@@ -90,19 +90,19 @@ class UNet(Module):
 		self.retain_dim = retain_dim
 		self.out_size = out_size
 
-def forward(self, x):
-	# grab the features from the encoder
-	enc_features = self.encoder(x)
-	# pass the encoder features through decoder making sure that
-	# their dimensions are suited for concatenation
-	dec_features = self.decoder(enc_features[::-1][0],
-		enc_features[::-1][1:])
-	# pass the decoder features through the regression head to
-	# obtain the segmentation mask
-	map_ = self.head(dec_features)
-	# check to see if we are retaining the original output
-	# dimensions and if so, then resize the output to match them
-	if self.retainDim:
-		map_ = F.interpolate(map_, self.outSize)
-	# return the segmentation map_
-	return map_
+	def forward(self, x):
+		# grab the features from the encoder
+		enc_features = self.encoder(x)
+		# pass the encoder features through decoder making sure that
+		# their dimensions are suited for concatenation
+		dec_features = self.decoder(enc_features[::-1][0],
+			enc_features[::-1][1:])
+		# pass the decoder features through the regression head to
+		# obtain the segmentation mask
+		map_ = self.head(dec_features)
+		# check to see if we are retaining the original output
+		# dimensions and if so, then resize the output to match them
+		if self.retain_dim:
+			map_ = F.interpolate(map_, self.out_size)
+		# return the segmentation map_
+		return map_
