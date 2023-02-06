@@ -5,3 +5,6 @@ opencv-contrib-python
 imutils
 scikit-learn
 tqdm
+pandas
+scikit-image
+tensorflow
